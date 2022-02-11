@@ -37,7 +37,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+           'name'=>'required',
+            'email'=>'required|unique:users|email',
+            'password'=>'required|min:4',
+            're_password'=>'same:password',
+        ]);
+        User::create([
+           'name'=>$request->name,
+           'email'=>$request->email,
+           'password'=>bcrypt($request->password),
+           'is_admin'=>$request->is_admin,
+        ]);
+
+        return redirect()->route('admin.user')->with('success','Create User Success');
+
     }
 
     /**

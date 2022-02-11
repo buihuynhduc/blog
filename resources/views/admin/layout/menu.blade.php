@@ -26,7 +26,7 @@
         <!-- /.nav-second-level -->
     </li>
     <li>
-        <a href="#"><i class="fa fa-cube fa-fw"></i> Product<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-cube fa-fw"></i> Post<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
                 <a href="{{route('admin.post')}}">List Post</a>
