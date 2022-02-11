@@ -4,48 +4,54 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Category
-                        <small>Edit</small>
+                    <h1 class="page-header">User
+                        <small>Add</small>
                     </h1>
+                    @if(session('errors'))
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">
+                                {{$error}}
+                            </div>
+                        @endforeach
+                    @endif
+                    @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{session('error')}}
+                            </div>
+                    @endif
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="" method="POST">
+                    <form action="{{route('admin.user.update',$user->id)}}" method="POST">
+                        @csrf
+                        @method('put')
                         <div class="form-group">
-                            <label>Category Parent</label>
-                            <select class="form-control">
-                                <option value="0">Please Choose Category</option>
-                                <option value="">Tin Tức</option>
-                            </select>
+                            <label>Username</label>
+                            <input class="form-control" name="name" value="{{$user->name}}" />
                         </div>
                         <div class="form-group">
-                            <label>Category Name</label>
-                            <input class="form-control" name="txtCateName" placeholder="Please Enter Category Name" />
+                            <label>Password Old</label>
+                            <input type="password" class="form-control" name="password" placeholder="Please Enter Old Password" />
                         </div>
                         <div class="form-group">
-                            <label>Category Order</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Order" />
+                            <label>Password New</label>
+                            <input type="password" class="form-control" name="new_password" placeholder="Please Enter New Password" />
                         </div>
                         <div class="form-group">
-                            <label>Category Keywords</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords" />
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" value="{{$user->email}}" />
                         </div>
                         <div class="form-group">
-                            <label>Category Description</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Category Status</label>
+                            <label>User Level</label>
                             <label class="radio-inline">
-                                <input name="rdoStatus" value="1" checked="" type="radio">Visible
+                                <input name="is_admin" value="1" {{($user->is_admin==1)?'checked':''}} type="radio">Admin
                             </label>
                             <label class="radio-inline">
-                                <input name="rdoStatus" value="2" type="radio">Invisible
+                                <input name="is_admin" value="0" type="radio" {{($user->is_admin==0)?'checked':''}}>Member
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-default">Category Edit</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
-                        <form>
+                        <button type="submit" class="btn btn-default">User Edit</button>
+                    </form>
                 </div>
             </div>
             <!-- /.row -->
