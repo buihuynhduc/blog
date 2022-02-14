@@ -24,7 +24,12 @@
 </head>
 
 <body>
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{session('error')}}
 
+    </div>
+@endif
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -33,10 +38,11 @@
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="" method="POST">
+                    <form action="{{route('admin.login.check')}}" method="POST">
+                        @csrf
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                <input class="form-control" placeholder="name" name="name"  autofocus>
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Password" name="password" type="password" value="">

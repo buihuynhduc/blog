@@ -11,7 +11,7 @@
         <!-- /input-group -->
     </li>
     <li>
-        <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+        <a href="{{route('admin.post')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
     </li>
     <li>
         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Category<span class="fa arrow"></span></a>

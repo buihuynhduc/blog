@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->group(function ()
+{
+    Route::get('login',[AuthController::class,'index'])->name('admin.login');
+    Route::post('login', [AuthController::class,'check'])->name('admin.login.check');
+});
 //--admin
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('checklogin')->group(function () {
+    Route::get('logout',[AuthController::class,'logout'])->name('admin.logout');
+    Route::get('profile',[\App\Http\Controllers\Admin\Profile::class,'index'])->name('admin.profile');
     Route::prefix('category')->group(function () {
         Route::get('', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('admin.category');
         Route::get('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('admin.category.create');
@@ -53,4 +62,4 @@ Route::prefix('admin')->group(function () {
 
 
 });
-
+Route::get('/',[\App\Http\Controllers\Web\WebController::class,'home'])->name('home');

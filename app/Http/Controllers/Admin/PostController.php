@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -65,7 +66,7 @@ class PostController extends Controller
                 'content'=>$request->get('content'),
                 'image'=>$image,
                 'view_count'=>0,
-                'user_id'=>5,
+                'user_id'=>Auth::user()->id,
                 'new_post'=>$request->new_post?1:0,
                 'category_id'=>$request->category_id,
                 'slug'=>Str::slug($request->name),
@@ -137,7 +138,7 @@ class PostController extends Controller
                 'content'=>$request->get('content'),
                 'image'=>$image,
                 'view_count'=>0,
-                'user_id'=>5,
+                'user_id'=>Auth::user()->id,
                 'new_post'=>$request->new_post?1:0,
                 'category_id'=>$request->category_id,
                 'slug'=>Str::slug($request->name),
